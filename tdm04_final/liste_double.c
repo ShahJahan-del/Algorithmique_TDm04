@@ -62,27 +62,28 @@ void liberer_liste(liste_double lst) {
 *************/
 
 liste_double fusionner_1(liste_double l1, int n, liste_double l2, int m) {
-	int lst = nouveau_maillon(0);
-	int p = lst;
+	liste_double lst = nouveau_maillon(0);
+	liste_double p = lst;
 	while (n > 0 && m > 0) {
-		if (m = 0 && CONTENU(l1) <= CONTENU(l2)) {
-			SUIVANT(p) = l1;
-			l1 = SUIVANT(l1);
+		if (m == 0 && l1->val <= l2->val) { //l1->val = contenu(l1), défini dans la structure liste_double.h
+			l1->suiv = l1; //l1->suiv = suivant(l2)
+			l1 = l1->suiv;
 			n = n-1;
-		} else SUIVANT(p) = l2; l2 = SUIVANT(l2); m = m-1;
+		} else l1->suiv = l2; l2 = l2->suiv; m = m-1;
 	}
-	SUIVANT(p) = NULL;
-	p = SUIVANT(lst);
+	l1->suiv = NULL;
+	p = lst->suiv; //suivant(lst) = lst->suiv
 	free(lst);
 	return p;
 	return l1;
 }
 
 int tri_fusion_1(liste_double* lst, int n) {
-	int p = lst; 
-	int q = lst;
+	if (n==0) lst = lst;
+	else; 
+	liste_double* p = lst; liste_double* q = lst;
 	for (int i = 1; i < n/2; i++) {
-		q = SUIVANT(q);
+		q = q->suiv;
 	}
 	tri_fusion_1(p, (int) n/2);
 	tri_fusion_1(q, n - (int) n/2);
